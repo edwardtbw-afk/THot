@@ -1,276 +1,83 @@
 {
-  "$comment": "示范信源：首次启动时导入（scripts/seed.ts），已存在的不会被覆盖。之后在后台“信源”里新建、修改和暂停。字段说明见 docs/customize.md。",
+  "$comment": "信源配置：首次启动时导入（scripts/seed.ts），已存在的不会被覆盖。之后在后台“信源”里新建、修改和暂停。本版本已替换为四大制造业行业信源（木材家具造纸 / 医药器械 / 装备与金属制品 / 电子电气），字段说明见 docs/customize.md 与 docs/sources.md。",
   "sources": [
     {
-      "id": "rss-openai-news",
-      "name": "OpenAI News",
-      "kind": "rss",
+      "id": "web-cnfa",
+      "name": "中国家具协会",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://openai.com/news/rss.xml",
+        "url": "http://www.cnfa.com.cn/",
+        "parseMode": "html",
+        "itemSelector": "p.col-md-10.col-sm-10.col-xs-9.tab-ellipsis",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtRegex": "(20\\d{2}[-/.年]\\d{1,2}[-/.月]\\d{1,2})",
+        "detail": {
+          "maxFetches": 8,
+          "publishedAtSelector": ".isoc-container-head",
+          "publishedAtRegex": "(20\\d{2}-\\d{1,2}-\\d{1,2})"
+        },
         "_aihot": {
           "initialBackfillLimit": 8
         }
       },
-      "tier": "T1",
-      "owner_entity_id": "openai",
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "官方"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-google-deepmind",
-      "name": "Google DeepMind",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://deepmind.google/blog/rss.xml",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
-      "owner_entity_id": "google",
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "官方"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-google-research",
-      "name": "Google Research",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://research.google/blog/rss/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
-      "owner_entity_id": "google",
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "官方",
-        "研究"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-hugging-face",
-      "name": "Hugging Face Blog",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://huggingface.co/blog/feed.xml",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
-      "owner_entity_id": "hugging-face",
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "官方",
-        "开源"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-microsoft-research",
-      "name": "Microsoft Research",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://www.microsoft.com/en-us/research/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
-      "owner_entity_id": "microsoft",
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "官方",
-        "研究"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-nvidia-blog",
-      "name": "NVIDIA Blog",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://blogs.nvidia.com/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
-      "owner_entity_id": "nvidia",
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "官方"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-aws-ml",
-      "name": "AWS Machine Learning Blog",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://aws.amazon.com/blogs/machine-learning/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
+      "tier": "T1_5",
       "owner_entity_id": null,
       "participation_mode": "editorial",
-      "interval_minutes": 120,
+      "interval_minutes": 360,
       "tags": [
-        "官方",
-        "教程"
+        "协会",
+        "家具"
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-github-ai",
-      "name": "GitHub Blog · AI & ML",
-      "kind": "rss",
+      "id": "web-chinappi",
+      "name": "中国造纸协会",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://github.blog/ai-and-ml/feed/",
+        "url": "http://www.chinappi.org/",
+        "parseMode": "html",
+        "itemSelector": "li",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtRegex": "(20\\d{2}[-/.年]\\d{1,2}[-/.月]\\d{1,2})",
+        "allowUrlPrefixes": [
+          "http://www.chinappi.org/news/"
+        ],
         "_aihot": {
           "initialBackfillLimit": 8
         }
       },
-      "tier": "T1",
+      "tier": "T1_5",
       "owner_entity_id": null,
       "participation_mode": "editorial",
-      "interval_minutes": 120,
+      "interval_minutes": 360,
       "tags": [
-        "官方"
+        "协会",
+        "造纸"
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-mistral",
-      "name": "Mistral AI",
-      "kind": "rss",
+      "id": "web-papercom",
+      "name": "纸业网",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://mistral.ai/news/rss",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
-      "owner_entity_id": null,
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "官方"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-bair",
-      "name": "Berkeley AI Research",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://bair.berkeley.edu/blog/feed.xml",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
-      "owner_entity_id": null,
-      "participation_mode": "editorial",
-      "interval_minutes": 180,
-      "tags": [
-        "研究"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-the-verge-ai",
-      "name": "The Verge · AI",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T2",
-      "owner_entity_id": null,
-      "participation_mode": "editorial",
-      "interval_minutes": 60,
-      "tags": [
-        "媒体"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-techcrunch-ai",
-      "name": "TechCrunch · AI",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://techcrunch.com/category/artificial-intelligence/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T2",
-      "owner_entity_id": null,
-      "participation_mode": "editorial",
-      "interval_minutes": 60,
-      "tags": [
-        "媒体"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-ars-technica-ai",
-      "name": "Ars Technica · AI",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://arstechnica.com/ai/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T2",
-      "owner_entity_id": null,
-      "participation_mode": "editorial",
-      "interval_minutes": 60,
-      "tags": [
-        "媒体"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-mit-tech-review-ai",
-      "name": "MIT Technology Review · AI",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://www.technologyreview.com/topic/artificial-intelligence/feed",
+        "url": "http://www.paper.com.cn/news/",
+        "parseMode": "html",
+        "itemSelector": "tr",
+        "linkSelector": "td a",
+        "titleSelector": "td a",
+        "allowUrlPrefixes": [
+          "http://www.paper.com.cn/news/daynews/"
+        ],
+        "detail": {
+          "publishedAtSelector": ".t2",
+          "maxFetches": 8
+        },
         "_aihot": {
           "initialBackfillLimit": 8
         }
@@ -280,57 +87,30 @@
       "participation_mode": "editorial",
       "interval_minutes": 120,
       "tags": [
-        "媒体"
+        "媒体",
+        "造纸"
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-the-decoder",
-      "name": "The Decoder",
-      "kind": "rss",
+      "id": "web-chinatimber",
+      "name": "木材网",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://the-decoder.com/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T2",
-      "owner_entity_id": null,
-      "participation_mode": "editorial",
-      "interval_minutes": 60,
-      "tags": [
-        "媒体"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-simon-willison",
-      "name": "Simon Willison",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://simonwillison.net/atom/everything/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T2",
-      "owner_entity_id": null,
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "个人"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-import-ai",
-      "name": "Import AI",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://importai.substack.com/feed",
+        "url": "https://www.chinatimber.org/news/news.html?ty=1",
+        "parseMode": "html",
+        "itemSelector": ".news_c_ul li",
+        "linkSelector": "a",
+        "titleSelector": "h3",
+        "publishedAtRegex": "(20\\d{2}-\\d{1,2}-\\d{1,2})",
+        "allowUrlPrefixes": [
+          "https://www.chinatimber.org/news/detail.html"
+        ],
+        "detail": {
+          "publishedAtSelector": ".news_sTit",
+          "publishedAtRegex": "(20\\d{2}-\\d{1,2}-\\d{1,2})"
+        },
         "_aihot": {
           "initialBackfillLimit": 8
         }
@@ -340,18 +120,23 @@
       "participation_mode": "editorial",
       "interval_minutes": 180,
       "tags": [
-        "个人",
-        "周刊"
+        "媒体",
+        "木材"
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-latent-space",
-      "name": "Latent Space",
-      "kind": "rss",
+      "id": "web-cpp114",
+      "name": "中华印刷包装网",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://www.latent.space/feed",
+        "url": "http://www.cpp114.com/",
+        "parseMode": "html",
+        "itemSelector": "div.small-card",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtRegex": "(20\\d{2}[-/.年]\\d{1,2}[-/.月]\\d{1,2})",
         "_aihot": {
           "initialBackfillLimit": 8
         }
@@ -359,9 +144,308 @@
       "tier": "T2",
       "owner_entity_id": null,
       "participation_mode": "editorial",
-      "interval_minutes": 180,
+      "interval_minutes": 240,
       "tags": [
-        "个人"
+        "媒体",
+        "印刷"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-camdi",
+      "name": "中国医疗器械行业协会",
+      "kind": "web_list",
+      "config": {
+        "url": "http://www.camdi.cn/news/list/50,63,0",
+        "parseMode": "html",
+        "itemSelector": "div.news-v3-in-sm.no-padding",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtRegex": "(20\\d{2}[-/.年]\\d{1,2}[-/.月]\\d{1,2})",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T1_5",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "协会",
+        "医疗器械"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-cpi",
+      "name": "中国医药信息网",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.cpi.ac.cn/zx/xyzl/index.html",
+        "parseMode": "html",
+        "itemSelector": "ul.rightList li",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtRegex": "(20\\d{2}-\\d{1,2}-\\d{1,2})",
+        "allowUrlPrefixes": [
+          "https://www.cpi.ac.cn/zx/"
+        ],
+        "detail": {
+          "maxFetches": 8
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T1_5",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "准官方",
+        "医药监管"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-caam",
+      "name": "中国汽车工业协会",
+      "kind": "web_list",
+      "config": {
+        "url": "http://www.caam.org.cn/hyzx",
+        "parseMode": "html",
+        "itemSelector": ".box-d, .box-b li",
+        "linkSelector": "a",
+        "titleSelector": ".tit a, span.cont",
+        "publishedAtRegex": "(20\\d{2}[-/.]\\d{1,2}[-/.]\\d{1,2})",
+        "allowUrlPrefixes": [
+          "http://www.caam.org.cn/chn/",
+          "https://www.caam.org.cn/chn/"
+        ],
+        "detail": {
+          "maxFetches": 8,
+          "publishedAtSelector": ".fourTop",
+          "publishedAtRegex": "(20\\d{2}-\\d{1,2}-\\d{1,2})"
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T1_5",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 240,
+      "tags": [
+        "协会",
+        "汽车"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-cmtba",
+      "name": "中国机床工具工业协会",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.cmtba.org.cn/web/14/list.html",
+        "parseMode": "html",
+        "itemSelector": "ul.first-list li",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtRegex": "(20\\d{2}-\\d{1,2}-\\d{1,2})",
+        "allowUrlPrefixes": [
+          "https://www.cmtba.org.cn/web/",
+          "http://www.cmtba.org.cn/web/"
+        ],
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T1_5",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "协会",
+        "机床"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-cncma",
+      "name": "中国工程机械工业协会",
+      "kind": "web_list",
+      "config": {
+        "url": "http://www.cncma.org/col/hangyxw",
+        "parseMode": "html",
+        "itemSelector": "div.lby_nr2_t",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtRegex": "(20\\d{2}[-/.年]\\d{1,2}[-/.月]\\d{1,2})",
+        "allowUrlPrefixes": [
+          "http://www.cncma.org/article/"
+        ],
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T1_5",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 300,
+      "tags": [
+        "协会",
+        "工程机械"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-cansi",
+      "name": "中国船舶工业行业协会",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.cansi.org.cn/cms/document/show/14.html",
+        "parseMode": "html",
+        "itemSelector": "li.item",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtRegex": "(20\\d{2}[-/.年]\\d{1,2}[-/.月]\\d{1,2})",
+        "allowUrlPrefixes": [
+          "https://www.cansi.org.cn/cms/document/",
+          "https://cansi.org.cn/cms/document/",
+          "http://www.cansi.org.cn/cms/document/",
+          "http://cansi.org.cn/cms/document/"
+        ],
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T1_5",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "协会",
+        "船舶"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-cima",
+      "name": "中国仪器仪表行业协会",
+      "kind": "web_list",
+      "config": {
+        "url": "http://www.cima.org.cn/nlist.asp?xid=/1112",
+        "parseMode": "html",
+        "itemSelector": "li",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtRegex": "(20\\d{2}[-/.年]\\d{1,2}[-/.月]\\d{1,2})",
+        "allowUrlPrefixes": [
+          "http://www.cima.org.cn/nnews.asp"
+        ],
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T1_5",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "协会",
+        "仪器仪表"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-semi",
+      "name": "SEMI中国（半导体）",
+      "kind": "web_list",
+      "config": {
+        "url": "http://www.semi.org.cn/",
+        "parseMode": "html",
+        "itemSelector": "div.media-body",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtRegex": "(20\\d{2}[-/.年]\\d{1,2}[-/.月]\\d{1,2})",
+        "allowUrlPrefixes": [
+          "https://www.semi.org.cn/site/semi/article/",
+          "http://www.semi.org.cn/site/semi/article/"
+        ],
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T1_5",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 300,
+      "tags": [
+        "协会",
+        "半导体"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-ceeia",
+      "name": "中国电器工业协会",
+      "kind": "web_list",
+      "config": {
+        "url": "http://www.ceeia.com/",
+        "parseMode": "html",
+        "itemSelector": "p.clearfix-of",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtRegex": "(20\\d{2}[-/.年]\\d{1,2}[-/.月]\\d{1,2})",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T1_5",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "协会",
+        "电气"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-cheaa",
+      "name": "中国家用电器协会",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.cheaa.org/channels/9.html",
+        "parseMode": "html",
+        "itemSelector": "td",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtRegex": "(20\\d{2}[-/.年]\\d{1,2}[-/.月]\\d{1,2})",
+        "allowUrlPrefixes": [
+          "https://www.cheaa.org/contents/"
+        ],
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T1_5",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "协会",
+        "家电"
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false
